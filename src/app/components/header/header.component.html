@@ -1,0 +1,27 @@
+<header class="flex flex-col w-96 h-screen text-xl font-light bg-Blue-50">
+    <div
+        action=""
+        class="flex flex-row gap-4 items-center justify-center p-4 bg-Blue-400 shadow-xl"
+    >
+        <input
+            class="pl-2 p-1 rounded-md w-full text-Blue-950 focus:shadow-lg focus:outline-none appearance-none"
+            type="text"
+            placeholder="Pikachu..."
+            name="pokeFilter"
+            [(ngModel)]="pokeFilter"
+        />
+    </div>
+
+    <section class="overflow-auto p-2 text-Blue-500 text-center">
+        <ul>
+            <li
+                class="hover:text-Blue-700 cursor-pointer m-2 border-b-2 border-b-Blue-200"
+                *ngFor="let pokemons of apiResults | filterPokemon : pokeFilter"
+            >
+                <button (click)="pokeData(pokemons.name)" class="uppercase">
+                    {{ pokemons.name }}
+                </button>
+            </li>
+        </ul>
+    </section>
+</header>

@@ -1,0 +1,88 @@
+<main class="w-[96rem] h-screen grid place-content-center bg-RedPrimary-50">
+    <section
+        class="w-[35rem] h-[50rem] bg-RedPrimary-500 rounded-xl p-4"
+        *ngIf="pokeData !== undefined"
+        style="
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+                rgba(0, 0, 0, 0.12) 0px -12px 30px,
+                rgba(0, 0, 0, 0.12) 0px 4px 6px,
+                rgba(0, 0, 0, 0.17) 0px 12px 13px,
+                rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        "
+    >
+        <app-decoration></app-decoration>
+
+        <section
+            class="border-4 border-RedPrimary-600 w-full min-h-[35rem] rounded-2xl flex flex-col items-center p-4 gap-4"
+        >
+            <div
+                class="flex flex-row justify-center w-[30rem] h-56 p-2 border-2 border-RedPrimary-600 bg-Blue-300 rounded-lg"
+                *ngIf="pokeData.sprites.front_default !== null; else noImage"
+            >
+                <img
+                    class="w-52"
+                    src="{{ pokeData.sprites.front_default }}"
+                    alt="{{ pokeData.name }}"
+                />
+
+                <img
+                    class="w-52"
+                    src="{{ pokeData.sprites.back_default }}"
+                    alt="{{ pokeData.name }}"
+                />
+            </div>
+
+            <ng-template #noImage>
+                <div
+                    class="flex flex-row justify-center w-[30rem] h-56 p-2 border-2 border-RedPrimary-600 bg-Blue-300 rounded-lg gap-4"
+                >
+                    <img
+                        #noImage
+                        class="w-36"
+                        src="../../../assets/noImageAvailable.svg"
+                        alt="noImageAvailable"
+                    />
+
+                    <img
+                        #noImage
+                        class="w-36"
+                        src="../../../assets/noImageAvailable.svg"
+                        alt="noImageAvailable"
+                    />
+                </div>
+            </ng-template>
+
+            <div
+                class="flex flex-col w-full h-72 p-2 items-center bg-RedPrimary-50 rounded-lg border-2 border-RedPrimary-600 gap-4"
+            >
+                <div
+                    class="flex flex-row w-full h-auto items-center justify-between text-2xl uppercase mb-1"
+                >
+                    <p
+                        class="bg-RedPrimary-100 w-20 text-center h-10 rounded-full text-RedPrimary-700"
+                        *ngIf="pokeData.id !== 0"
+                    >
+                        {{ pokeData.id }}
+                    </p>
+                    <h1
+                        class="bg-RedPrimary-100 w-72 text-center h-auto rounded-full text-Blue-700"
+                    >
+                        {{ pokeData.name }}
+                    </h1>
+                </div>
+
+                <div class="flex flex-col w-full p-4">
+                    <div
+                        *ngFor="let stats of pokeData.stats"
+                        class="flex flex-row justify-between text-xl bg-RedPrimary-100 rounded-2xl mb-1 px-4"
+                    >
+                        <p class="text-RedPrimary-400">{{ stats.stat.name }}</p>
+                        <p class="text-Blue-400" *ngIf="stats.base_stat !== 0">
+                            {{ stats.base_stat }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
